@@ -1,0 +1,7 @@
+error: unsupported number of outputs
+ --> compile_fail_tests/unzip/too_many_outputs.rs:6:5
+  |
+6 |     unzip!(let (a, b, c, d, e, f, g, h, i, j, k, l, m) = input)
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the macro `$crate::__zip_left` which comes from the expansion of the macro `unzip` (in Nightly builds, run with -Z macro-backtrace for more info)

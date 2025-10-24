@@ -1,0 +1,9 @@
+error: unsupported number of inputs
+  --> compile_fail_tests/zip/too_many_inputs.rs:20:5
+   |
+20 | /     zip!(
+21 | |         ia0, ia1, ia2, ia3, ia4, ia5, ia6, ia7, ia8, ia9, ia10, ia11, ia12
+22 | |     )
+   | |_____^
+   |
+   = note: this error originates in the macro `$crate::__zip_left` which comes from the expansion of the macro `zip` (in Nightly builds, run with -Z macro-backtrace for more info)
