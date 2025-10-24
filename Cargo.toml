@@ -1,0 +1,15 @@
+[package]
+name = "const-tools"
+version = "0.1.0"
+edition = "2024"
+authors = ["Mick van Gelderen"]
+description = "Utilities to help write safe const fns such as destructuring and array operations."
+repository = "https://github.com/mickvangelderen/const-map-array"
+license = "MIT OR Apache-2.0"
+keywords = ["const", "map", "array", "zip", "fold", "destructure"]
+categories = ["rust-patterns"]
+
+[dependencies]
+
+[dev-dependencies]
+trybuild = "1.0.111"

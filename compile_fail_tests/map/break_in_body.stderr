@@ -1,0 +1,26 @@
+warning: unreachable call
+ --> compile_fail_tests/map/break_in_body.rs:4:5
+  |
+4 | /     map!(input, |_| {
+5 | |         break;
+  | |         ----- any code following this expression is unreachable
+6 | |     })
+  | |______^ unreachable call
+  |
+  = note: `#[warn(unreachable_code)]` on by default
+  = note: this warning originates in the macro `$crate::map` which comes from the expansion of the macro `map` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0080]: evaluation panicked: break is not allowed because a value must be written into every array element
+  --> compile_fail_tests/map/break_in_body.rs:10:5
+   |
+10 |     test([1]);
+   |     ^^^^^^^^^ evaluation of `_` failed inside this call
+   |
+note: inside `test::<1>`
+  --> compile_fail_tests/map/break_in_body.rs:4:5
+   |
+ 4 | /     map!(input, |_| {
+ 5 | |         break;
+ 6 | |     })
+   | |______^ the failure occurred here
+   = note: this error originates in the macro `$crate::panic::panic_2021` which comes from the expansion of the macro `map` (in Nightly builds, run with -Z macro-backtrace for more info)

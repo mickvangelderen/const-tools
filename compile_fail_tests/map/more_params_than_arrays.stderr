@@ -1,0 +1,5 @@
+error: meta-variable `iae` repeats 1 time, but `iip` repeats 2 times
+ --> src/map.rs
+  |
+  |             [$(($iae, $iip, ))*]
+  |               ^^^^^^^^^^^^^^^^
