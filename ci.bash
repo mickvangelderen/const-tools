@@ -10,8 +10,8 @@ RESET='\033[0m'
 
 cd "$(dirname "$0")"
 
-if ! cargo +nightly --version &> /dev/null; then
-    rustup toolchain install nightly
+if ! cargo +nightly fmt --version &> /dev/null; then
+    rustup toolchain install nightly --component rustfmt
 fi
 
 if ! command -v cargo-sort &> /dev/null; then
