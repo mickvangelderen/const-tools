@@ -4,4 +4,4 @@ error: pattern requires `..` due to inaccessible fields
 9 |         destructure!(let Wrap { } = self);
   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   |
-  = note: this error originates in the macro `$crate::destructure` which comes from the expansion of the macro `destructure` (in Nightly builds, run with -Z macro-backtrace for more info)
+  = note: this error originates in the macro `$crate::__destructure__struct` which comes from the expansion of the macro `destructure` (in Nightly builds, run with -Z macro-backtrace for more info)

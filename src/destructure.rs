@@ -38,15 +38,18 @@ pub const fn __unimplemented_to_owned<T>(_: &T) -> T {
 /// ```
 #[macro_export]
 macro_rules! destructure {
-    // struct
     (let $S:path { $($field_spec:tt)* } = $value:expr) => {
-        $crate::destructure!(@struct ($($field_spec)*) => let $S {} = $value);
+        $crate::__destructure__struct!(($($field_spec)*) => let $S {} = $value);
     };
-    // tuple
     (let ($($var:pat_param),* $(,)?) = $value:expr) => {
-        $crate::destructure!(@tuple ($($var),*); (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11) => (); let () = $value);
+        $crate::__destructure__tuple!(($($var),*); (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11) => (); let () = $value);
     };
-    (@struct ()
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __destructure__struct {
+    (()
         => let $S:path { $($field:ident: $var:pat_param),* } = $value:expr
     ) => {
         let value = $value;
@@ -61,27 +64,32 @@ macro_rules! destructure {
             let $var = unsafe { ::core::ptr::addr_of!(value.$field).read() };
         )*
     };
-    (@struct ($next_field:ident: $next_var:pat_param $(,)?)
+    (($next_field:ident: $next_var:pat_param $(,)?)
         => let $S:path { $($field:ident: $var:pat_param),* } = $value:expr
     ) => {
-        $crate::destructure!(@struct () => let $S { $($field: $var,)* $next_field: $next_var } = $value);
+        $crate::__destructure__struct!(() => let $S { $($field: $var,)* $next_field: $next_var } = $value);
     };
-    (@struct ($next_field:ident $(,)?)
+    (($next_field:ident $(,)?)
         => let $S:path { $($field:ident: $var:pat_param),* } = $value:expr
     ) => {
-        $crate::destructure!(@struct () => let $S { $($field: $var,)* $next_field: $next_field } = $value);
+        $crate::__destructure__struct!(() => let $S { $($field: $var,)* $next_field: $next_field } = $value);
     };
-    (@struct ($next_field:ident: $next_var:pat_param, $($rest:tt)*)
+    (($next_field:ident: $next_var:pat_param, $($rest:tt)*)
         => let $S:path { $($field:ident: $var:pat_param),* } = $value:expr
     ) => {
-        $crate::destructure!(@struct ($($rest)*) => let $S { $($field: $var,)* $next_field: $next_var } = $value);
+        $crate::__destructure__struct!(($($rest)*) => let $S { $($field: $var,)* $next_field: $next_var } = $value);
     };
-    (@struct ($next_field:ident, $($rest:tt)*)
+    (($next_field:ident, $($rest:tt)*)
         => let $S:path { $($field:ident: $var:pat_param),* } = $value:expr
     ) => {
-        $crate::destructure!(@struct ($($rest)*) => let $S { $($field: $var,)* $next_field: $next_field } = $value);
+        $crate::__destructure__struct!(($($rest)*) => let $S { $($field: $var,)* $next_field: $next_field } = $value);
     };
-    (@tuple (); ($($index_rest:tt),*)
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __destructure__tuple {
+    ((); ($($index_rest:tt),*)
         => ($($ty:tt),*); let ($($index:tt: $var:pat_param),*) = $value:expr
     ) => {
         let value: ($($ty,)*) = $value; // asserts correct arity
@@ -92,14 +100,14 @@ macro_rules! destructure {
             let $var = unsafe { ::core::ptr::addr_of!(value.$index).read() };
         )*
     };
-    (@tuple ($var_head:pat_param $(,$var_tail:pat_param)*); ()
+    (($var_head:pat_param $(,$var_tail:pat_param)*); ()
         => ($($ty:tt),*); let ($($index:tt: $var:pat_param),*) = $value:expr
     ) => {
         compile_error!("tuple arity is larger than the maximum supported arity 12")
     };
-    (@tuple ($var_head:pat_param $(,$var_tail:pat_param)*); ($index_head:tt $(,$index_tail:tt)*)
+    (($var_head:pat_param $(,$var_tail:pat_param)*); ($index_head:tt $(,$index_tail:tt)*)
         => ($($ty:tt),*); let ($($index:tt: $var:pat_param),*) = $value:expr
     ) => {
-        $crate::destructure!(@tuple ($($var_tail),*); ($($index_tail),*) => ($($ty,)* _); let ($($index: $var,)* $index_head: $var_head) = $value);
+        $crate::__destructure__tuple!(($($var_tail),*); ($($index_tail),*) => ($($ty,)* _); let ($($index: $var,)* $index_head: $var_head) = $value);
     };
 }

@@ -7,5 +7,5 @@ error: no rules expected `..`
 note: while trying to match `)`
  --> src/destructure.rs
   |
-  |     (@struct ()
-  |               ^
+  |     (()
+  |       ^

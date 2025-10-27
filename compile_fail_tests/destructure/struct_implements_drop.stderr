@@ -8,4 +8,4 @@ error[E0509]: cannot move out of type `Wrap<T>`, which implements the `Drop` tra
    |         data moved here
    |         move occurs because `value` has type `T`, which does not implement the `Copy` trait
    |
-   = note: this error originates in the macro `$crate::destructure` which comes from the expansion of the macro `destructure` (in Nightly builds, run with -Z macro-backtrace for more info)
+   = note: this error originates in the macro `$crate::__destructure__struct` which comes from the expansion of the macro `destructure` (in Nightly builds, run with -Z macro-backtrace for more info)

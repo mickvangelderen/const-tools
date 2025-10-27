@@ -19,4 +19,4 @@ error[E0282]: type annotations needed
   |     cannot infer type
   |     cannot call a method on a raw pointer with an unknown pointee type
   |
-  = note: this error originates in the macro `$crate::destructure` which comes from the expansion of the macro `destructure` (in Nightly builds, run with -Z macro-backtrace for more info)
+  = note: this error originates in the macro `$crate::__destructure__tuple` which comes from the expansion of the macro `destructure` (in Nightly builds, run with -Z macro-backtrace for more info)
