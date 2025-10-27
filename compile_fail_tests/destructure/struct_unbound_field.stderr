@@ -1,0 +1,7 @@
+error: pattern requires `..` due to inaccessible fields
+ --> compile_fail_tests/destructure/struct_unbound_field.rs:9:9
+  |
+9 |         destructure!(let Wrap { } = self);
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: this error originates in the macro `$crate::destructure` which comes from the expansion of the macro `destructure` (in Nightly builds, run with -Z macro-backtrace for more info)

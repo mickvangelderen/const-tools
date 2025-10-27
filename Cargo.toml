@@ -6,11 +6,10 @@ authors = ["Mick van Gelderen"]
 description = "Utilities to help write safe const fns such as destructuring and array operations."
 repository = "https://github.com/mickvangelderen/const-map-array"
 license = "MIT OR Apache-2.0"
-keywords = ["const", "map", "array", "zip", "fold"]
+keywords = ["const", "map", "array", "zip", "fold", "destructure"]
 categories = ["rust-patterns"]
 
 [dependencies]
-const-destructure = "0.1.2"
 
 [dev-dependencies]
 trybuild = "1.0.111"

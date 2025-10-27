@@ -3,16 +3,9 @@
 version = 4
 
 [[package]]
-name = "const-destructure"
-version = "0.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6c619cb6338f736d26eff4f0417043fb71dffed2c78441f3f738cd6aee6743a4"
-
-[[package]]
 name = "const-tools"
 version = "0.1.0"
 dependencies = [
- "const-destructure",
  "trybuild",
 ]
 

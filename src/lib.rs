@@ -25,10 +25,23 @@ pub use __same_len::*;
 #[doc(hidden)]
 pub mod __zip_left;
 
+#[doc(hidden)]
+pub mod destructure;
+pub use destructure::*;
+
+#[doc(hidden)]
 mod fold;
+
+#[doc(hidden)]
 mod map;
+
+#[doc(hidden)]
 mod scan;
+
+#[doc(hidden)]
 mod unzip;
+
+#[doc(hidden)]
 mod zip;
 
 // The array-related macros implemented by this library use the following (meta)variable naming scheme:

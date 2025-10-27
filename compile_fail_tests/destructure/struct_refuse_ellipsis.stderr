@@ -1,0 +1,11 @@
+error: no rules expected `..`
+ --> compile_fail_tests/destructure/struct_refuse_ellipsis.rs:9:33
+  |
+9 |         destructure!(let Wrap { .. } = self);
+  |                                 ^^ no rules expected this token in macro call
+  |
+note: while trying to match `)`
+ --> src/destructure.rs
+  |
+  |     (@struct ()
+  |               ^

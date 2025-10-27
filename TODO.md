@@ -1,10 +1,9 @@
 - create separate macros for rules to speed up compilation
 - implement fused unzip!(... scan!(...))
-- implement unzip!(expr) (which would require const_destructure by the caller)
+- implement unzip!(expr) (which would require destructure by the caller)
 - deduplicate compile tests, particularly for fused operations involving map which can take closures with a body of (...), { ... (...) } or { ... } or an expression returning a fn
 - deduplicate parsing somehow?
 - maybe pull apart grouped repeated expressions like [(oap, oa, oi)] into [(oap)] [(oa)] [(oi)] so we can pass around only what's needed more easily
 - only use [ ] for grouping in macros, instead of [] and () (I think there are no good ways to use a certain style at a certain nested level because transofrmations may change nesting and it would be annoying to repack the items).
-- inline const_destructure into this crate
 - publish
 - split __call and __zip_left into decl-macro-tools crate or something?

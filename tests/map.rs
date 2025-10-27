@@ -1,6 +1,6 @@
 mod support;
 
-use const_destructure::const_destructure;
+use const_tools::destructure;
 use const_tools::map;
 
 compile_test!(single_closure => {
@@ -33,7 +33,7 @@ compile_test!(zip_closure => {
 
 compile_test!(zip_function => {
     const fn add_pair(pair: (i32, i32)) -> i32 {
-        const_destructure!(let (x, y) = pair);
+        destructure!(let (x, y) = pair);
         x + y
     }
 

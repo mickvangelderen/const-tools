@@ -1,6 +1,6 @@
 mod support;
 
-use const_destructure::const_destructure;
+use const_tools::destructure;
 use const_tools::{scan, unzip, zip};
 
 // TODO: It's hard to write all the combinations of inputs by hand and maintain them, so it would be better to try and
@@ -50,7 +50,7 @@ compile_test!(max_input_output => {
 
     #[allow(clippy::too_many_arguments)]
     const fn max_input_output<T, const N: usize>(input: T12<[T; N]>) -> T12<[T; N]> {
-        const_destructure!(let (ia0, ia1, ia2, ia3, ia4, ia5, ia6, ia7, ia8, ia9, ia10, ia11) = input);
+        destructure!(let (ia0, ia1, ia2, ia3, ia4, ia5, ia6, ia7, ia8, ia9, ia10, ia11) = input);
         unzip!(let (o0, o1, o2, o3, o4, o5, o6, o7, o8, o9, o10, o11) = zip!(ia0, ia1, ia2, ia3, ia4, ia5, ia6, ia7, ia8, ia9, ia10, ia11));
         (o0, o1, o2, o3, o4, o5, o6, o7, o8, o9, o10, o11)
     }
@@ -118,7 +118,7 @@ compile_test!(map_zip_closure_block_opaque => {
 
 compile_test!(map_zip_function => {
     const fn product_and_sum_fn(pair: (u32, u32)) -> (u32, u32) {
-        const_destructure!(let (x, y) = pair);
+        destructure!(let (x, y) = pair);
         (x * y, x + y)
     }
 
@@ -201,7 +201,7 @@ compile_test!(map_function => {
 compile_test!(scan_closure => {
     const fn running_sum_and_product<const N: usize>(ia: [u32; N]) -> ([u32; N], [u32; N]) {
         unzip!(let (sums, products) = scan!(ia, (0u32, 1u32), |acc, x| {
-            const_destructure!(let (sum, prod) = *acc);
+            destructure!(let (sum, prod) = *acc);
             let new_sum = sum + x;
             let new_prod = prod * x;
             *acc = (new_sum, new_prod);
@@ -219,7 +219,7 @@ compile_test!(scan_closure => {
 compile_test!(scan_closure_block_tuple => {
     const fn running_sum_and_product<const N: usize>(ia: [u32; N]) -> ([u32; N], [u32; N]) {
         unzip!(let (sums, products) = scan!(ia, (0u32, 1u32), |acc, x| {
-            const_destructure!(let (sum, prod) = *acc);
+            destructure!(let (sum, prod) = *acc);
             let new_sum = sum + x;
             let new_prod = prod * x;
             *acc = (new_sum, new_prod);
@@ -258,7 +258,7 @@ compile_test!(scan_zip_closure => {
         b: [u32; N],
     ) -> ([u32; N], [u32; N]) {
         unzip!(let (sums, products) = scan!(zip!(a, b), (0u32, 1u32), |acc, (x, y)| {
-            const_destructure!(let (sum, prod) = *acc);
+            destructure!(let (sum, prod) = *acc);
             let new_sum = sum + x + y;
             let new_prod = prod * x * y;
             *acc = (new_sum, new_prod);
@@ -281,7 +281,7 @@ compile_test!(scan_zip_closure_block_tuple => {
         unzip!(let (sums, products) = scan!(zip!(a, b), (0u32, 1u32), |acc, (x, y)| {
             acc.0 += x + y;
             acc.1 *= x * y;
-            const_destructure!(let (sum, prod) = *acc);
+            destructure!(let (sum, prod) = *acc);
             (sum, prod)
         }));
         (sums, products)

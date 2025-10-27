@@ -14,7 +14,7 @@ macro_rules! unzip {
     };
     (@parse_unzip_arg [$iae:expr] [$(($oap:pat_param, $oa:ident, $oi:ident))*]) => {
         $crate::unzip!(@expand [
-            ::const_destructure::const_destructure!(let ($($oi),*) = ii);
+            $crate::destructure!(let ($($oi),*) = ii);
         ] [($iae, ii, ia)] [$(($oap, $oa, $oi))*])
     };
     // [map_body] [(iae, iip, ia)] [(oap, oa, oi)]
@@ -27,7 +27,7 @@ macro_rules! unzip {
     (@parse_map_body [$body:expr] $i:tt [$(($oap:pat_param, $oa:ident, $oi:ident))*]) => {
         $crate::unzip!(@expand [
             let item = $body;
-            ::const_destructure::const_destructure!(let ($($oi),*) = item);
+            $crate::destructure!(let ($($oi),*) = item);
         ] $i [$(($oap, $oa, $oi))*])
     };
     // [map_body_block_stmts] [body_acc] [(iae, iip, ia)] [(oap, oa, oi)]
@@ -36,7 +36,7 @@ macro_rules! unzip {
             let item = {
                 $($body)*
             };
-            ::const_destructure::const_destructure!(let ($($oi),*) = item);
+            $crate::destructure!(let ($($oi),*) = item);
         ] $i [$(($oap, $oa, $oi))*])
     };
     (@parse_map_body_block [($($oie:expr),* $(,)?)] [$($body:tt)*] $i:tt [$(($oap:pat_param, $oa:ident, $oi:ident))*]) => {

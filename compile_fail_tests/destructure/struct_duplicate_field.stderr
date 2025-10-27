@@ -1,0 +1,10 @@
+error[E0025]: field `value` bound multiple times in the pattern
+ --> compile_fail_tests/destructure/struct_duplicate_field.rs:9:9
+  |
+9 |         destructure!(let Wrap { value: v1, value: v2 } = self);
+  |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |         |
+  |         multiple uses of `value` in pattern
+  |         first use of `value`
+  |
+  = note: this error originates in the macro `$crate::destructure` which comes from the expansion of the macro `destructure` (in Nightly builds, run with -Z macro-backtrace for more info)
