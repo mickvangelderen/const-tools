@@ -10,6 +10,10 @@ RESET='\033[0m'
 
 cd "$(dirname "$0")"
 
+if ! cargo +nightly --version &> /dev/null; then
+    rustup toolchain install nightly
+fi
+
 if ! command -v cargo-sort &> /dev/null; then
     cargo install cargo-sort --locked
 fi
