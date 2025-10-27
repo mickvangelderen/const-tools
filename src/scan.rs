@@ -27,7 +27,7 @@ macro_rules! scan {
             [$(($iae, ))*]
             [(ii0) (ii1) (ii2) (ii3) (ii4) (ii5) (ii6) (ii7) (ii8) (ii9) (ii10) (ii11)]
             "unsupported number of inputs"
-            $crate::scan!(@zip_function <> [$init] [$fn])
+            $crate::__scan__zip_function!(<> [$init] [$fn])
         )
     };
     ($iae:expr, $init:expr, |$acc:pat_param, $iip:pat_param| $body:expr) => {{
@@ -43,7 +43,12 @@ macro_rules! scan {
             $fn(&mut acc, item)
         })
     }};
-    (@zip_function [$(($iae:expr, $ii:ident))*] [$init:expr] [$fn:expr]) => {
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __scan__zip_function {
+    ([$(($iae:expr, $ii:ident))*] [$init:expr] [$fn:expr]) => {
         $crate::scan!(zip!($($iae),*), $init, |acc, ($($ii,)*)| $fn(acc, ($($ii,)*)))
     };
 }

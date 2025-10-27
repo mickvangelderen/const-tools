@@ -14,8 +14,16 @@
 /// ```
 #[macro_export]
 macro_rules! fold {
+    ($($fold_args:tt)*) => {
+        $crate::__fold__parse!([$($fold_args)*] $crate::__fold__expand!(<>))
+    };
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __fold__parse {
     // [args] cb
-    (@parse [zip!($($iae:expr),* $(,)?), $init:expr, |$acc:pat_param, ($($iip:pat_param),* $(,)?)| $($body:tt)*] $($cb:tt)*) => {
+    ([zip!($($iae:expr),* $(,)?), $init:expr, |$acc:pat_param, ($($iip:pat_param),* $(,)?)| $($body:tt)*] $($cb:tt)*) => {
         $crate::__zip_left!(
             [$(($iae, $iip, ))*]
             [(ia0) (ia1) (ia2) (ia3) (ia4) (ia5) (ia6) (ia7) (ia8) (ia9) (ia10) (ia11)]
@@ -23,14 +31,19 @@ macro_rules! fold {
             $($cb)*([$init] [$($body)*] [$acc] <>)
         )
     };
-    (@parse [$iae:expr, $init:expr, |$acc:pat_param, $iip:pat_param| $($body:tt)*] $($cb:tt)*) => {
+    ([$iae:expr, $init:expr, |$acc:pat_param, $iip:pat_param| $($body:tt)*] $($cb:tt)*) => {
         $crate::__call!($($cb)*([$init] [$($body)*] [$acc] [($iae, $iip, ia0)]))
     };
-    (@parse [$iae:expr, $init:expr, $fn:expr] $($cb:tt)*) => {
+    ([$iae:expr, $init:expr, $fn:expr] $($cb:tt)*) => {
         $crate::__call!($($cb)*([$init] [$fn(acc, ii)] [acc] [($iae, ii, ia0)]))
     };
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __fold__expand {
     // [init] [body] [acc] [(iae, iip, ia)]
-    (@expand [$init:expr] [$body:expr] [$acc:pat_param] [$(($iae:expr, $iip:pat_param, $ia:ident))+]) => {{
+    ([$init:expr] [$body:expr] [$acc:pat_param] [$(($iae:expr, $iip:pat_param, $ia:ident))+]) => {{
         $(
             let $ia = ::core::mem::ManuallyDrop::new($iae);
             let $ia = $crate::__manually_drop_inner_ref(&$ia);
@@ -52,7 +65,4 @@ macro_rules! fold {
         );
         acc
     }};
-    ($($fold_args:tt)*) => {
-        $crate::fold!(@parse [$($fold_args)*] $crate::fold!(@expand <>))
-    };
 }

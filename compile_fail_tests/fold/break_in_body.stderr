@@ -8,7 +8,7 @@ warning: unreachable expression
   | |______^ unreachable expression
   |
   = note: `#[warn(unreachable_code)]` on by default
-  = note: this warning originates in the macro `$crate::fold` which comes from the expansion of the macro `fold` (in Nightly builds, run with -Z macro-backtrace for more info)
+  = note: this warning originates in the macro `$crate::__fold__expand` which comes from the expansion of the macro `fold` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0080]: evaluation panicked: break is not allowed because a value must be written into every array element
   --> compile_fail_tests/fold/break_in_body.rs:10:5
