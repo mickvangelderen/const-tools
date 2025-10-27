@@ -77,6 +77,7 @@ macro_rules! __call__parse_fn {
 ///     10
 /// ));
 /// ```
+#[doc(hidden)]
 #[macro_export]
 macro_rules! __call {
     ($($input:tt)*) => {
