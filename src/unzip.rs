@@ -1,3 +1,18 @@
+/// Unzips an array of tuples into multiple arrays in const contexts.
+///
+/// It is possible to assign the result of the unzipped expression inside of the macro invocation to avoid the need for
+/// [`crate::destructure`].
+///
+/// # Examples
+///
+/// ```
+/// use const_tools::unzip;
+///
+/// const fn unzip_pairs<A, B, const N: usize>(arr: [(A, B); N]) -> ([A; N], [B; N]) {
+///     unzip!(let (a, b) = arr);
+///     (a, b)
+/// }
+/// ```
 #[macro_export]
 macro_rules! unzip {
     (let ($($oap:pat_param),* $(,)?) = $($unzip_arg:tt)*) => {

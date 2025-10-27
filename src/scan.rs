@@ -1,3 +1,18 @@
+/// Produces an array of intermediate fold results in const contexts.
+///
+/// # Examples
+///
+/// ```
+/// use const_tools::scan;
+///
+/// const fn enumerate<T, const N: usize>(value: [T; N]) -> [(usize, T); N] {
+///     scan!(value, 0, |count, item| {
+///         let index = *count;
+///         *count += 1;
+///         (index, item)
+///     })
+/// }
+/// ```
 #[macro_export]
 macro_rules! scan {
     (zip!($($iae:expr),* $(,)?), $init:expr, |$acc:pat_param, ($($iip:pat_param),* $(,)?)| $body:expr) => {{

@@ -4,6 +4,38 @@ pub const fn __unimplemented_to_owned<T>(_: &T) -> T {
     panic!("no valid implementation exists for this function and it should not be invoked")
 }
 
+/// Allows destructuring in const contexts.
+///
+/// # Examples
+///
+/// Destructuring tuples:
+///
+/// ```
+/// use const_tools::destructure;
+///
+/// const fn swap<A, B>(value: (A, B)) -> (B, A) {
+///     destructure!(let (a, b) = value);
+///     (b, a)
+/// }
+/// ```
+///
+/// Destructuring structs:
+///
+/// ```
+/// use const_tools::destructure;
+///
+/// struct Pair<A, B> {
+///     first: A,
+///     second: B,
+/// }
+///
+/// impl<A, B> Pair<A, B> {
+///     const fn swap(self) -> Pair<B, A> {
+///         destructure!(let Self { first, second } = self);
+///         Pair { first: second, second: first }
+///     }
+/// }
+/// ```
 #[macro_export]
 macro_rules! destructure {
     // struct

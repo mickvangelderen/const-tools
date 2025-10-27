@@ -1,3 +1,17 @@
+/// Folds an array into a single value in const contexts.
+///
+/// # Examples
+///
+/// ```
+/// use const_tools::{fold, destructure};
+///
+/// const fn last<T, const N: usize>(value: [T; N]) -> Option<T> {
+///     fold!(value, None, |prev, item| {
+///         std::mem::forget(prev); // Can't drop in const context, for the sake of illustration
+///         Some(item)
+///     })
+/// }
+/// ```
 #[macro_export]
 macro_rules! fold {
     // [args] cb

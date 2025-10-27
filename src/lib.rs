@@ -1,6 +1,20 @@
-//! Const array operations: map, zip, unzip, scan, fold.
+//! This crate provides macros for destructuring ([`crate::destructure`]) and for performing various operations on arrays in const contexts ([`crate::map`], [`crate::unzip`], ...).
 //!
-//! This crate provides macros for performing various operations on arrays in const contexts.
+//! ## Fused Operations
+//!
+//! Many operations are fused together in order to generate less code.
+//! For example, [`map!`] can operate directly on [`zip!`]'ed arrays without requiring a separate import:
+//!
+//! ```
+//! use const_tools::map;  // `zip!` is built into `map!`
+//!
+//! const fn combine<A, B, const N: usize>(a: [A; N], b: [B; N]) -> [(A, B); N] {
+//!     map!(zip!(a, b), |(x, y)| (x, y))
+//! }
+//! ```
+//!
+//! Similarly, [`unzip!`] can operate directly on the output of [`map!`].
+//! You typically only need to import the outermost operation you're performing.
 #![no_std]
 
 #[doc(hidden)]

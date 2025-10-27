@@ -17,6 +17,17 @@ macro_rules! __zip__expand {
     }};
 }
 
+/// Zips multiple arrays into an array of tuples in const contexts.
+///
+/// # Examples
+///
+/// ```
+/// use const_tools::zip;
+///
+/// const fn zip_two<A, B, const N: usize>(a: [A; N], b: [B; N]) -> [(A, B); N] {
+///     zip!(a, b)
+/// }
+/// ```
 #[macro_export]
 macro_rules! zip {
     ($($iae:expr),* $(,)?) => {

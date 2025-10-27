@@ -1,3 +1,16 @@
+/// Maps a function over arrays in const contexts.
+///
+/// # Examples
+///
+/// ```
+/// use const_tools::map;
+///
+/// struct Wrap<T>(T);
+///
+/// const fn wrap_all<T, const N: usize>(value: [T; N]) -> [Wrap<T>; N] {
+///     map!(value, Wrap)
+/// }
+/// ```
 #[macro_export]
 macro_rules! map {
     // [args] [cb]
