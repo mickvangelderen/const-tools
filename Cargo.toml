@@ -1,6 +1,6 @@
 [package]
 name = "const-tools"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 authors = ["Mick van Gelderen"]
 description = "Utilities to help write safe const fns such as destructuring and array operations."
