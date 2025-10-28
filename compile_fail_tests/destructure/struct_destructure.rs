@@ -3,8 +3,9 @@ struct Wrap<T> {
 }
 
 impl<T> Wrap<T> {
-    const fn test(self) -> T {
-        self.value
+    const fn into_inner(self) -> T {
+        let Self { value } = self;
+        value
     }
 }
 
