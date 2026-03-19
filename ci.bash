@@ -21,7 +21,7 @@ fi
 dir=$(basename "$(pwd)")
 
 for command in \
-    "cargo clippy --fix --allow-dirty --allow-staged" \
+    "cargo clippy --fix --all-targets --allow-dirty --allow-staged" \
     "cargo +nightly fmt" \
     "cargo sort --workspace > /dev/null" \
     "cargo test" \
