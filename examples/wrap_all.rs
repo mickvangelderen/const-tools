@@ -4,4 +4,6 @@ const fn wrap_all<T, const N: usize>(value: [T; N]) -> [(T,); N] {
     map!(value, |item| (item,))
 }
 
-fn main() {}
+fn main() {
+    assert!(matches!(wrap_all([1, 2, 3]), [(1,), (2,), (3,)]));
+}
