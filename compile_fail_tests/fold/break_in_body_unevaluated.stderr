@@ -1,0 +1,17 @@
+error: unreachable expression
+ --> compile_fail_tests/fold/break_in_body_unevaluated.rs:4:5
+  |
+4 | /     fold!(input, 0, |_, _| {
+5 | |         break;
+  | |         ----- any code following this expression is unreachable
+6 | |     })
+  | |______^ unreachable expression
+  |
+note: the lint level is defined here
+ --> compile_fail_tests/fold/break_in_body_unevaluated.rs:4:5
+  |
+4 | /     fold!(input, 0, |_, _| {
+5 | |         break;
+6 | |     })
+  | |______^
+  = note: this error originates in the macro `$crate::__fold__expand` which comes from the expansion of the macro `fold` (in Nightly builds, run with -Z macro-backtrace for more info)

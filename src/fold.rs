@@ -51,6 +51,7 @@ macro_rules! __fold__expand {
         let len = $crate::__same_len!($($ia),*);
         let mut acc = $init;
         let mut index = 0;
+        #[deny(unreachable_code)]
         while index < len {
             $(
                 let $iip = unsafe { ::core::ptr::read(&$ia[index]) };
