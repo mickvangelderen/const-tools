@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2](https://github.com/mickvangelderen/const-tools/compare/v0.1.1...v0.1.2) - 2026-03-19
+
+### Other
+
+- Invoke example implementations
+- Add from_indices!
+- lint all targets
+- Deny unreachable code in loop body
+- Update compiler
+- Fix repository link
+
 ### Added
 
 - Add `from_indices!` for building arrays from `0..N` in const contexts
