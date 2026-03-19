@@ -1,4 +1,4 @@
-//! This crate provides macros for destructuring ([`crate::destructure`]) and for performing various operations on arrays in const contexts ([`crate::map`], [`crate::unzip`], ...).
+//! This crate provides macros for destructuring ([`crate::destructure`]) and for performing various operations on arrays in const contexts ([`crate::from_indices`], [`crate::map`], [`crate::unzip`], ...).
 //!
 //! ## Fused Operations
 //!
@@ -45,6 +45,9 @@ pub use destructure::*;
 
 #[doc(hidden)]
 mod fold;
+
+#[doc(hidden)]
+mod from_indices;
 
 #[doc(hidden)]
 mod map;
