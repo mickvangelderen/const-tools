@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Other
 
 - Fix repository link in crate metadata
+- Deny unreachable code in loop bodies so even if the code is not evaluated at compile-time, the compiler can generate an error in some cases.
 
 ## [0.1.1](https://github.com/mickvangelderen/const-tools/compare/v0.1.0...v0.1.1) - 2025-10-28
 

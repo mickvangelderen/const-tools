@@ -1,0 +1,17 @@
+error: unreachable call
+ --> compile_fail_tests/scan/break_in_body_unevaluated.rs:4:5
+  |
+4 | /     scan!(input, 0, |_, _| {
+5 | |         break;
+  | |         ----- any code following this expression is unreachable
+6 | |     })
+  | |______^ unreachable call
+  |
+note: the lint level is defined here
+ --> compile_fail_tests/scan/break_in_body_unevaluated.rs:4:5
+  |
+4 | /     scan!(input, 0, |_, _| {
+5 | |         break;
+6 | |     })
+  | |______^
+  = note: this error originates in the macro `$crate::__map__expand` which comes from the expansion of the macro `scan` (in Nightly builds, run with -Z macro-backtrace for more info)

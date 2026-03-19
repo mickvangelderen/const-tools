@@ -91,6 +91,7 @@ macro_rules! __unzip__expand {
         )*
         let len = $crate::__same_len!($(&$oa,)* $(&$ia,)*);
         let mut index = 0;
+        #[deny(unreachable_code)]
         while index < len {
             $(
                 let $iip = unsafe { ::core::ptr::read(&$ia[index]) };
