@@ -5,4 +5,6 @@ const fn into_inner<T>(value: (T,)) -> T {
     inner
 }
 
-fn main() {}
+fn main() {
+    assert!(matches!(into_inner((123,)), 123));
+}
